@@ -29,6 +29,7 @@ What should be included on this branch:
     /add-course - form to add a course
     /edit-course/<id> - edit form
     /delete-course/<id> - delete route
+    /course-details/<id> - view course details
 
 4. Early Website Styling and Structure
     Initial layout
