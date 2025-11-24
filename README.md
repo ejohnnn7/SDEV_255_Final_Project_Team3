@@ -33,4 +33,4 @@ What should be included on this branch:
 4. Early Website Styling and Structure
     Initial layout
     Buttons for add/view/edit/delete
-    Navigation links
+    Navigation links 
