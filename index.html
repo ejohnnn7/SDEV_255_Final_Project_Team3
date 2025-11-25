@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDEV 255 – Stage 1</title>
+
+    <!-- Link CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>SDEV 255 – Course Management (Stage 1)</h1>
+        <button id="openAddModal" class="primary-btn">Add New Course</button>
+    </header>
+
+    <section class="table-section">
+        <h2>All Courses</h2>
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Teacher</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filled by JavaScript -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Modal -->
+    <div id="courseFormModal" class="modal">
+        <div class="modal-content">
+            <h2>Add / Edit Course</h2>
+            <form id="courseForm">
+                <label>Course Name</label>
+                <input type="text" id="courseName" required>
+
+                <label>Description</label>
+                <textarea id="courseDesc" required></textarea>
+
+                <label>Teacher</label>
+                <select id="teacherSelect" required></select>
+
+                <div class="form-buttons">
+                    <button type="submit" class="primary-btn">Save</button>
+                    <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>
