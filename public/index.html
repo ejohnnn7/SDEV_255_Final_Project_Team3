@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Management System - Home</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CourseManager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="app">
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">CourseManager</a>
 
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <a href="index.html" class="active">Home</a>
-            <a href="courses.html">Courses</a>
-            <a href="login.html">Login</a>
-        </nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
 
-        <!-- Home Page Header -->
-        <header class="page-header">
-            <h1>Welcome to the Course Management System</h1>
-        </header>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+        <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
+      </div>
+    </nav>
+  </header>
 
-        <!-- Simple Intro -->
-        <section class="intro-section" style="text-align:center; padding: 10px 20px;">
-            <h2>About This System</h2>
-            <p>
-                This application allows teachers to manage courses and students to browse available classes and adjust their schedules.
-                Additional functionality will be added in upcoming assignments.
-            </p>
-        </section>
+  <main class="container">
+    <section class="hero">
+      <h1>About This System</h1>
+      <p>This application allows teachers to manage courses and students to browse available classes and adjust their schedules.</p>
+      <div class="hero-actions">
+        <a href="courses.html" class="secondary-btn">View Courses</a>
+      </div>
+    </section>
+  </main>
 
-    </div>
+  <footer class="site-footer">
+    <div class="container">© 2025 CourseManager</div>
+  </footer>
+
+  <script src="nav.js" defer></script>
 </body>
 </html>

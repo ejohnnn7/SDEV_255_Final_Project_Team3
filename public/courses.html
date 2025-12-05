@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Course</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Courses - CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .search-bar { display:grid; grid-template-columns: 1fr 180px 140px auto; gap:8px; margin:16px 0; }
+  </style>
 </head>
 <body>
-    <div class="app">
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="courses.html" class="active">Courses</a>
-            <a href="login.html">Login</a>
-        </nav>
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">CourseManager</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+        <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>All Courses</h2>
+
+    <div class="search-bar">
+      <input id="searchName" type="text" placeholder="Search by course name">
+      <input id="searchNumber" type="text" placeholder="Course number (e.g., CS101)">
+      <select id="filterSubject">
+        <option value="">All subjects</option>
+        <option>Computer Science</option>
+        <option>Information Technology</option>
+        <option>Mathematics</option>
+        <option>Biology</option>
+      </select>
+      <button id="searchBtn" class="primary-btn">Search</button>
     </div>
+
+    <div id="coursesContainer" class="courses-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 CourseManager</div>
+  </footer>
+
+  <script src="nav.js" defer></script>
+  <script src="courses.js" defer></script>
 </body>
 </html>
