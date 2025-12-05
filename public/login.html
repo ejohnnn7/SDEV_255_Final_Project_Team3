@@ -8,40 +8,50 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Navigation -->
   <header class="site-header">
     <nav class="navbar">
       <a href="index.html" class="brand">CourseManager</a>
+
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Courses</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
       </ul>
+
       <div class="nav-actions">
-        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
-        <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
+        <a href="login.html" class="btn-outline active" id="nav-login">Log in</a>
       </div>
     </nav>
   </header>
 
+  <!-- Page Content -->
   <main class="container">
     <section class="form-section">
       <h2>Log in</h2>
+
       <form action="/login" method="POST" class="course-form">
-        <label>Email</label>
-        <input type="email" name="email" required>
-        <label>Password</label>
-        <input type="password" name="password" required>
-        <button type="submit">Login</button>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required>
+
+        <button type="submit" class="primary-btn">Login</button>
       </form>
+
       <p style="margin-top:15px; text-align:center; color:#555;">
-        Don’t have an account? <a href="signup.html" style="color:#4a9e88; font-weight:600;">Sign up here</a>
+        Don’t have an account?
+        <a href="signup.html" style="color:#4a9e88; font-weight:600;">
+          Sign up here
+        </a>
       </p>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">© 2025 CourseManager</div>
+    <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
   </footer>
 
   <script src="nav.js" defer></script>

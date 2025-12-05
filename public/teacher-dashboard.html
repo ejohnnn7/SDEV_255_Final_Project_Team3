@@ -6,26 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .dashboard-header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:10px 0 20px; }
-    .dashboard-header h2 { margin:0; color:#2b4d66; }
-    .stats-row { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-bottom:20px; }
-    .stat-card { background:#fff; padding:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .stat-card h3 { margin-bottom:6px; color:#2b4d66; font-size:1rem; }
-    .search-bar { display:grid; grid-template-columns: 1fr 180px 140px auto; gap:8px; margin:16px 0; }
-    .courses-grid { margin-top: 12px; }
-  </style>
 </head>
 <body>
+
+  <!-- Navigation -->
   <header class="site-header">
     <nav class="navbar">
       <a href="index.html" class="brand">CourseManager</a>
+
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Courses</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="teacher-dashboard.html" class="active">Teacher Dashboard</a></li>
       </ul>
+
       <div class="nav-actions">
         <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
         <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
@@ -33,7 +27,10 @@
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
+
+    <!-- Header -->
     <div class="dashboard-header">
       <h2>Teacher Dashboard</h2>
       <div>
@@ -41,6 +38,7 @@
       </div>
     </div>
 
+    <!-- Stats Cards -->
     <div class="stats-row">
       <div class="stat-card">
         <h3>Your courses</h3>
@@ -56,9 +54,11 @@
       </div>
     </div>
 
+    <!-- Add Course Form -->
     <section class="form-section">
       <h2>Add a new course</h2>
-      <form action="/add-course" method="POST" class="course-form">
+      <form action="/create-course" method="POST" class="course-form">
+
         <label for="number">Course number</label>
         <input id="number" name="number" placeholder="e.g., CS101" required>
 
@@ -78,6 +78,7 @@
       </form>
     </section>
 
+    <!-- Teacher Course List -->
     <section class="courses-section">
       <h2>Your courses</h2>
 
@@ -96,8 +97,10 @@
 
       <div id="teacherCourses" class="courses-grid"></div>
     </section>
+
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">© 2025 CourseManager</div>
   </footer>

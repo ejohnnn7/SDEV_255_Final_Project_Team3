@@ -6,24 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .signup-grid { display:flex; gap:30px; flex-wrap:wrap; }
-    .signup-grid .form-box { flex:1; min-width:300px; }
-    .signup-grid h3 { color:#2b4d66; margin-bottom:15px; }
-  </style>
 </head>
 <body>
+
+  <!-- Navigation -->
   <header class="site-header">
     <nav class="navbar">
       <a class="brand" href="index.html">CourseManager</a>
+
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Courses</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a class="active" href="signup.html">Sign Up</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="signup.html" class="active">Sign Up</a></li>
       </ul>
+
       <div class="nav-actions">
         <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
         <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
@@ -31,14 +27,17 @@
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
     <section class="form-section">
       <h2>Create an Account</h2>
-      <p style="color:#555; margin-bottom:20px;">
+      <p class="signup-description">
         Register below as a <strong>Student</strong> or <strong>Teacher</strong>.
       </p>
 
       <div class="signup-grid">
+
+        <!-- Student Signup -->
         <div class="form-box">
           <h3>Student</h3>
           <form action="/signup/student" method="POST" class="course-form">
@@ -55,6 +54,7 @@
           </form>
         </div>
 
+        <!-- Teacher Signup -->
         <div class="form-box">
           <h3>Teacher</h3>
           <form action="/signup/teacher" method="POST" class="course-form">
@@ -70,10 +70,12 @@
             <button type="submit" class="secondary-btn">Sign Up as Teacher</button>
           </form>
         </div>
+
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">© 2025 CourseManager</div>
   </footer>

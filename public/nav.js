@@ -1,46 +1,59 @@
 // public/nav.js
-(function() {
+(function () {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+  // Highlight active nav link
   document.querySelectorAll(".nav-links a").forEach(link => {
-    if (link.getAttribute("href") === currentPage) link.classList.add("active");
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
   });
 
+  // Fetch the current user (teacher, student, or null)
   fetch('/me')
-    .then(r => r.json())
+    .then(res => res.json())
     .then(user => {
-      const list = document.querySelector('.nav-links');
+      const navList = document.querySelector('.nav-links');
       const loginBtn = document.getElementById('nav-login');
       const logoutBtn = document.getElementById('nav-logout');
 
-      if (!list) return;
+      if (!navList) return;
 
-      // Remove any previously injected dashboard links to avoid duplicates
-      list.querySelectorAll('[data-dashboard-link]').forEach(el => el.remove());
+      // Remove old dashboard links so we don't duplicate them
+      navList.querySelectorAll('[data-dashboard]').forEach(el => el.remove());
 
-      if (user && user.role === 'teacher') {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = "/teacher-dashboard";
-        a.textContent = "Teacher Dashboard";
-        li.setAttribute('data-dashboard-link', 'teacher');
-        li.appendChild(a);
-        list.appendChild(li);
+      if (user) {
+        // ---- LOGGED-IN USER ----
         if (loginBtn) loginBtn.style.display = 'none';
         if (logoutBtn) logoutBtn.style.display = '';
-      } else if (user && user.role === 'student') {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = "/student-dashboard";
-        a.textContent = "Student Dashboard";
-        li.setAttribute('data-dashboard-link', 'student');
-        li.appendChild(a);
-        list.appendChild(li);
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = '';
+
+        // Teacher dashboard
+        if (user.role === 'teacher') {
+          const li = document.createElement('li');
+          li.setAttribute("data-dashboard", "teacher");
+          li.innerHTML = `<a href="teacher-dashboard.html">Teacher Dashboard</a>`;
+          navList.appendChild(li);
+        }
+
+        // Student dashboard
+        if (user.role === 'student') {
+          const li = document.createElement('li');
+          li.setAttribute("data-dashboard", "student");
+          li.innerHTML = `<a href="student-dashboard.html">Student Dashboard</a>`;
+          navList.appendChild(li);
+        }
+
       } else {
+        // ---- LOGGED OUT ----
         if (loginBtn) loginBtn.style.display = '';
         if (logoutBtn) logoutBtn.style.display = 'none';
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      // If /me fails, assume logged-out state
+      const loginBtn = document.getElementById('nav-login');
+      const logoutBtn = document.getElementById('nav-logout');
+      if (loginBtn) loginBtn.style.display = '';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+    });
 })();
