@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Dashboard - CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .dashboard-header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:10px 0 20px; }
+    .dashboard-header h2 { margin:0; color:#2b4d66; }
+    .stats-row { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-bottom:20px; }
+    .stat-card { background:#fff; padding:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .stat-card h3 { margin-bottom:6px; color:#2b4d66; font-size:1rem; }
+    .search-bar { display:grid; grid-template-columns: 1fr 180px 140px auto; gap:8px; margin:16px 0; }
+    .courses-grid { margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">CourseManager</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+        <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="dashboard-header">
+      <h2>Teacher Dashboard</h2>
+      <div>
+        <a class="secondary-btn" href="courses.html">All Courses</a>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <h3>Your courses</h3>
+        <p id="stat-my-count">—</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total credits assigned</h3>
+        <p id="stat-my-credits">—</p>
+      </div>
+      <div class="stat-card">
+        <h3>Last added</h3>
+        <p id="stat-last-added">—</p>
+      </div>
+    </div>
+
+    <section class="form-section">
+      <h2>Add a new course</h2>
+      <form action="/add-course" method="POST" class="course-form">
+        <label for="number">Course number</label>
+        <input id="number" name="number" placeholder="e.g., CS101" required>
+
+        <label for="name">Course name</label>
+        <input id="name" name="name" placeholder="e.g., Intro to Programming" required>
+
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" placeholder="e.g., Computer Science" required>
+
+        <label for="credits">Credits</label>
+        <input id="credits" type="number" name="credits" placeholder="e.g., 3" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Brief description" required></textarea>
+
+        <button type="submit" class="primary-btn">Add course</button>
+      </form>
+    </section>
+
+    <section class="courses-section">
+      <h2>Your courses</h2>
+
+      <div class="search-bar">
+        <input id="t-searchName" type="text" placeholder="Search by name">
+        <input id="t-searchNumber" type="text" placeholder="Course number">
+        <select id="t-filterSubject">
+          <option value="">All subjects</option>
+          <option>Computer Science</option>
+          <option>Information Technology</option>
+          <option>Mathematics</option>
+          <option>Biology</option>
+        </select>
+        <button id="t-searchBtn" class="primary-btn">Search</button>
+      </div>
+
+      <div id="teacherCourses" class="courses-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 CourseManager</div>
+  </footer>
+
+  <script src="nav.js" defer></script>
+  <script src="teacher-dashboard.js" defer></script>
+</body>
+</html>
