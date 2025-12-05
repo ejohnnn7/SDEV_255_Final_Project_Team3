@@ -2,58 +2,68 @@
 (function () {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-  // Highlight active nav link
+  // Highlight current page
   document.querySelectorAll(".nav-links a").forEach(link => {
     if (link.getAttribute("href") === currentPage) {
       link.classList.add("active");
     }
   });
 
-  // Fetch the current user (teacher, student, or null)
-  fetch('/me')
-    .then(res => res.json())
+  const navLinks = document.querySelector(".nav-links");
+  const loginBtn = document.getElementById("nav-login");
+  const logoutBtn = document.getElementById("nav-logout");
+
+  if (!navLinks) return;
+
+  // Load user session
+  fetch("/me")
+    .then(r => r.json())
     .then(user => {
-      const navList = document.querySelector('.nav-links');
-      const loginBtn = document.getElementById('nav-login');
-      const logoutBtn = document.getElementById('nav-logout');
+      // Remove any previously injected dashboard links
+      navLinks.querySelectorAll("[data-dashboard-link]").forEach(el => el.remove());
 
-      if (!navList) return;
+      // If user is logged in
+      if (user && user.role) {
+        // Determine dashboard label + link
+        let dashboardText = "";
+        let dashboardHref = "";
 
-      // Remove old dashboard links so we don't duplicate them
-      navList.querySelectorAll('[data-dashboard]').forEach(el => el.remove());
-
-      if (user) {
-        // ---- LOGGED-IN USER ----
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = '';
-
-        // Teacher dashboard
-        if (user.role === 'teacher') {
-          const li = document.createElement('li');
-          li.setAttribute("data-dashboard", "teacher");
-          li.innerHTML = `<a href="teacher-dashboard.html">Teacher Dashboard</a>`;
-          navList.appendChild(li);
+        if (user.role === "student") {
+          dashboardText = "Student Dashboard";
+          dashboardHref = "/student-dashboard";
+        } else if (user.role === "teacher") {
+          dashboardText = "Teacher Dashboard";
+          dashboardHref = "/teacher-dashboard";
         }
 
-        // Student dashboard
-        if (user.role === 'student') {
-          const li = document.createElement('li');
-          li.setAttribute("data-dashboard", "student");
-          li.innerHTML = `<a href="student-dashboard.html">Student Dashboard</a>`;
-          navList.appendChild(li);
+        // Inject dashboard link
+        if (dashboardText && dashboardHref) {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+
+          a.href = dashboardHref;
+          a.textContent = dashboardText;
+
+          // Highlight active dashboard tab
+          if (currentPage.includes("dashboard")) {
+            a.classList.add("active");
+          }
+
+          li.setAttribute("data-dashboard-link", "true");
+          li.appendChild(a);
+          navLinks.appendChild(li);
         }
 
-      } else {
-        // ---- LOGGED OUT ----
-        if (loginBtn) loginBtn.style.display = '';
-        if (logoutBtn) logoutBtn.style.display = 'none';
+        // Toggle login/logout visibility
+        if (loginBtn) loginBtn.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "";
+      }
+
+      // If user is logged out
+      else {
+        if (loginBtn) loginBtn.style.display = "";
+        if (logoutBtn) logoutBtn.style.display = "none";
       }
     })
-    .catch(() => {
-      // If /me fails, assume logged-out state
-      const loginBtn = document.getElementById('nav-login');
-      const logoutBtn = document.getElementById('nav-logout');
-      if (loginBtn) loginBtn.style.display = '';
-      if (logoutBtn) logoutBtn.style.display = 'none';
-    });
+    .catch(() => {});
 })();
