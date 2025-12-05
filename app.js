@@ -18,9 +18,11 @@ app.use(session({
 }));
 
 // ========= Data files =========
-const usersFile = path.join(__dirname, 'users.json');
-const coursesFile = path.join(__dirname, 'courses.json');
-const schedulesFile = path.join(__dirname, 'schedules.json');
+const dataDir = path.join(__dirname, 'data');
+
+const usersFile     = path.join(dataDir, 'users.json');
+const coursesFile   = path.join(dataDir, 'courses.json');
+const schedulesFile = path.join(dataDir, 'schedules.json');
 
 function loadJson(file, defaultVal) {
   if (fs.existsSync(file)) {
