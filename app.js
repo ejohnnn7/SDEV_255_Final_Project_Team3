@@ -26,25 +26,23 @@ const usersFile     = path.join(dataDir, 'users.json');
 const coursesFile   = path.join(dataDir, 'courses.json');
 const schedulesFile = path.join(dataDir, 'schedules.json');
 
-function loadJson(file, defaultVal) {
-  if (fs.existsSync(file)) {
-    try {
-      return JSON.parse(fs.readFileSync(file));
-    } catch (e) {
-      console.error(`Error parsing ${file}:`, e);
-      return defaultVal;
+// Create files if missing (fresh install protection)
+function ensureFileExists(file, defaultVal) {
+  if (!fs.existsSync(file)) {
+    // Create the directory if missing
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir);
     }
+
+    fs.writeFileSync(file, JSON.stringify(defaultVal, null, 2));
+    console.log(`[INIT] Created missing file: ${path.basename(file)}`);
   }
-  return defaultVal;
 }
 
-function saveJson(file, data) {
-  try {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
-  } catch (e) {
-    console.error(`Error writing ${file}:`, e);
-  }
-}
+// Ensure required data files exist
+ensureFileExists(usersFile, []);
+ensureFileExists(coursesFile, []);
+ensureFileExists(schedulesFile, {});
 
 // Initialize stores
 let users = loadJson(usersFile, []);           
