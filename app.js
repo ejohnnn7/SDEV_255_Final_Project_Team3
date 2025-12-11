@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const fs = require('fs');
-const cors= require('cors');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
@@ -21,19 +21,16 @@ app.use(session({
 
 // ========= Data files =========
 const dataDir = path.join(__dirname, 'data');
-
-const usersFile     = path.join(dataDir, 'users.json');
-const coursesFile   = path.join(dataDir, 'courses.json');
+const usersFile = path.join(dataDir, 'users.json');
+const coursesFile = path.join(dataDir, 'courses.json');
 const schedulesFile = path.join(dataDir, 'schedules.json');
 
 // Create files if missing (fresh install protection)
 function ensureFileExists(file, defaultVal) {
   if (!fs.existsSync(file)) {
-    // Create the directory if missing
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir);
     }
-
     fs.writeFileSync(file, JSON.stringify(defaultVal, null, 2));
     console.log(`[INIT] Created missing file: ${path.basename(file)}`);
   }
@@ -44,22 +41,45 @@ ensureFileExists(usersFile, []);
 ensureFileExists(coursesFile, []);
 ensureFileExists(schedulesFile, {});
 
+// ========= JSON Helpers =========
+function loadJson(file, defaultVal) {
+  if (fs.existsSync(file)) {
+    try {
+      return JSON.parse(fs.readFileSync(file));
+    } catch (e) {
+      console.error(`Error parsing ${file}:`, e);
+      return defaultVal;
+    }
+  }
+  return defaultVal;
+}
+
+function saveJson(file, data) {
+  try {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  } catch (e) {
+    console.error(`Error writing ${file}:`, e);
+  }
+}
+
 // Initialize stores
-let users = loadJson(usersFile, []);           
-let courses = loadJson(coursesFile, []);      
-let schedules = loadJson(schedulesFile, {});   
+let users = loadJson(usersFile, []);
+let courses = loadJson(coursesFile, []);
+let schedules = loadJson(schedulesFile, {});
 
 // ========= Helpers & Auth =========
 function requireLogin(req, res, next) {
   if (!req.session?.user) return res.redirect('/login');
   next();
 }
+
 function requireTeacher(req, res, next) {
   if (!req.session?.user || req.session.user.role !== 'teacher') {
     return res.status(403).send('Unauthorized: teacher role required');
   }
   next();
 }
+
 function requireStudent(req, res, next) {
   if (!req.session?.user || req.session.user.role !== 'student') {
     return res.status(403).send('Unauthorized: student role required');
@@ -78,7 +98,7 @@ app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'public', 'log
 app.get('/signup', (req, res) => res.sendFile(path.join(__dirname, 'public', 'signup.html')));
 app.get('/courses', (req, res) => res.sendFile(path.join(__dirname, 'public', 'courses.html')));
 
-// Protected dashboards (check roles)
+// Protected dashboards
 app.get('/teacher-dashboard', requireTeacher, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'teacher-dashboard.html'));
 });
@@ -121,8 +141,8 @@ app.post('/signup/teacher', (req, res) => {
 
   const user = { role: 'teacher', name: name.trim(), email: normalized, password };
   users.push(user);
-  saveJson(usersFile, users);
 
+  saveJson(usersFile, users);
   res.redirect('/login');
 });
 
@@ -131,9 +151,7 @@ app.post('/login', (req, res) => {
   const normalized = normalizeEmail(email);
 
   const user = users.find(u => u.email === normalized && u.password === password);
-  if (!user) {
-    return res.status(401).send('Invalid credentials');
-  }
+  if (!user) return res.status(401).send('Invalid credentials');
 
   req.session.user = { role: user.role, name: user.name, email: user.email };
 
@@ -216,8 +234,8 @@ app.post('/delete-course/:id', requireTeacher, (req, res) => {
   Object.keys(schedules).forEach(email => {
     schedules[email] = (schedules[email] || []).filter(cid => cid !== id);
   });
-  saveJson(schedulesFile, schedules);
 
+  saveJson(schedulesFile, schedules);
   res.redirect('/teacher-dashboard');
 });
 
