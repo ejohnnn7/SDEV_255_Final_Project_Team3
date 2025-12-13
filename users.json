@@ -1,0 +1,26 @@
+[
+  {
+    "role": "teacher",
+    "name": "Elizabeth John",
+    "email": "ejohn7@ivytech.edu",
+    "password": "Testing123"
+  },
+  {
+    "role": "student",
+    "name": "David Cuevas",
+    "email": "dcuevas5@ivytech.edu",
+    "password": "Testing123"
+  },
+  {
+    "role": "student",
+    "name": "v",
+    "email": "v@gmail.com",
+    "password": "vv"
+  },
+  {
+    "role": "teacher",
+    "name": "cc",
+    "email": "cc@gmail.com",
+    "password": "cc"
+  }
+]

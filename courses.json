@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1764965371661,
+    "number": "CS101",
+    "name": "Introduction to Programming",
+    "description": "Learn fundamental programming concepts using Python. Ideal for beginners.",
+    "subject": "Computer Science",
+    "credits": 3,
+    "createdByEmail": "ejohn7@ivytech.edu"
+  },
+  {
+    "id": 1764965579977,
+    "number": "IT201",
+    "name": "Web Development Basics",
+    "description": "Covers HTML, CSS, and basic JavaScript to build interactive websites.",
+    "subject": "Information Technology",
+    "credits": 4,
+    "createdByEmail": "ejohn7@ivytech.edu"
+  },
+  {
+    "id": 1764965606643,
+    "number": "MATH110",
+    "name": "College Algebra",
+    "description": "Functions, graphing, polynomial equations, and foundational math concepts.",
+    "subject": "Mathematics",
+    "credits": 3,
+    "createdByEmail": "ejohn7@ivytech.edu"
+  },
+  {
+    "id": 1764965626144,
+    "number": "BIOL101",
+    "name": "Intro to Biology",
+    "description": "Humans and the Biological World (Intro for non-scientists).",
+    "subject": "Biology",
+    "credits": 3,
+    "createdByEmail": "ejohn7@ivytech.edu"
+  },
+  {
+    "id": 1765584474504,
+    "number": "405",
+    "name": "Computing Logic",
+    "description": "......",
+    "subject": "Computer Science",
+    "credits": 6,
+    "createdByEmail": "cc@gmail.com"
+  }
+]
