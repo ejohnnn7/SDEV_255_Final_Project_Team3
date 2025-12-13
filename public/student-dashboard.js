@@ -1,4 +1,6 @@
-// Renders the list of available courses
+// =============================
+// Render Available Courses
+// =============================
 function renderAvailableCourses(list) {
   document.getElementById('allCourses').innerHTML = list.map(c => `
     <div class="course-card">
@@ -6,25 +8,31 @@ function renderAvailableCourses(list) {
       <p>${c.description}</p>
       <p><strong>Subject:</strong> ${c.subject}</p>
       <p><strong>Credits:</strong> ${c.credits}</p>
-      
+
       <div class="card-actions">
         <form action="/student/add-course/${c.id}" method="POST">
           <button class="primary-btn" type="submit">Add</button>
-        </form>
-        <form action="/student/drop-course/${c.id}" method="POST">
-          <button class="danger-btn" type="submit">Drop</button>
         </form>
       </div>
     </div>
   `).join('');
 }
 
-// Renders the student's schedule
+// =============================
+// Render Student Schedule (WITH DROP BUTTON)
+// =============================
 function renderSchedule(list) {
   document.getElementById('mySchedule').innerHTML = list.map(c => `
     <div class="course-card">
       <h3>${c.number} — ${c.name}</h3>
       <p>${c.description}</p>
+      <p><strong>Credits:</strong> ${c.credits}</p>
+
+      <div class="card-actions">
+        <form action="/student/drop-course/${c.id}" method="POST">
+          <button class="danger-btn" type="submit">Drop</button>
+        </form>
+      </div>
     </div>
   `).join('');
 
@@ -33,48 +41,56 @@ function renderSchedule(list) {
   document.getElementById('sum-count').textContent = list.length;
 }
 
-// Load all available courses
+// =============================
+// Load Available Courses
+// =============================
 function loadAllCourses() {
   fetch('/courses-list')
-    .then(r => r.json())
+    .then(res => res.json())
     .then(data => {
       window.__allCourses = data;
       renderAvailableCourses(data);
     })
-    .catch(() => alert("Error loading courses."));
+    .catch(() => alert('Error loading courses'));
 }
 
-// Load student's schedule
+// =============================
+// Load Student Schedule
+// =============================
 function loadSchedule() {
   fetch('/student/schedule')
-    .then(r => r.json())
+    .then(res => res.json())
     .then(renderSchedule)
-    .catch(() => alert("Error loading schedule."));
+    .catch(() => alert('Error loading schedule'));
 }
 
-// Search filters for available courses
+// =============================
+// Search Available Courses
+// =============================
 function searchAvailable() {
-  const q = document.getElementById('s-searchName').value.trim().toLowerCase();
-  const num = document.getElementById('s-searchNumber').value.trim().toLowerCase();
-  const subject = document.getElementById('s-filterSubject').value.trim().toLowerCase();
+  const name = document.getElementById('s-searchName').value.toLowerCase();
+  const number = document.getElementById('s-searchNumber').value.toLowerCase();
+  const subject = document.getElementById('s-filterSubject').value.toLowerCase();
 
   const filtered = (window.__allCourses || []).filter(c => {
-    const byName = q ? c.name.toLowerCase().includes(q) : true;
-    const byNum = num ? String(c.number).toLowerCase().includes(num) : true;
-    const bySub = subject ? c.subject.toLowerCase() === subject : true;
-    return byName && byNum && bySub;
+    const byName = name ? c.name.toLowerCase().includes(name) : true;
+    const byNumber = number ? String(c.number).toLowerCase().includes(number) : true;
+    const bySubject = subject ? c.subject.toLowerCase() === subject : true;
+    return byName && byNumber && bySubject;
   });
 
   renderAvailableCourses(filtered);
 }
 
-// Initialize the page
+// =============================
+// Init
+// =============================
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('s-searchBtn')?.addEventListener('click', searchAvailable);
+  document.getElementById('s-searchBtn')
+    .addEventListener('click', searchAvailable);
 
-  // Ensure role is student; if not, redirect
   fetch('/me')
-    .then(r => r.json())
+    .then(res => res.json())
     .then(user => {
       if (!user || user.role !== 'student') {
         window.location.href = 'login.html';
