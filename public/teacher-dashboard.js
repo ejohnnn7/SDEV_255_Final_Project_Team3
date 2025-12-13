@@ -15,7 +15,7 @@ function fetchMe() {
     });
 }
 
-// Render teacher's course list
+// Render teacher's course list with toggleable edit form
 function renderTeacherCourses(list) {
   const container = document.getElementById('teacherCourses');
   container.innerHTML = list.map(c => `
@@ -25,29 +25,38 @@ function renderTeacherCourses(list) {
       <p><strong>Subject:</strong> ${c.subject}</p>
       <p><strong>Credits:</strong> ${c.credits}</p>
 
-      <div class="card-actions">
-        <form action="/edit-course/${c.id}" method="POST" class="course-form no-margin">
-          <input name="name" placeholder="Edit name">
-          <input name="number" placeholder="Edit number">
-          <input name="subject" placeholder="Edit subject">
-          <input name="credits" type="number" placeholder="Edit credits">
-          <textarea name="description" placeholder="Edit description"></textarea>
-          <button class="secondary-btn" type="submit">Save changes</button>
-        </form>
-
+      <div class="card-actions" style="display:flex; gap:8px;">
+        <button class="secondary-btn toggle-edit-btn" data-id="${c.id}">Edit</button>
         <form action="/delete-course/${c.id}" method="POST">
           <button class="danger-btn" type="submit">Delete</button>
         </form>
       </div>
+
+      <form action="/edit-course/${c.id}" method="POST" class="course-form edit-form" style="display:none; margin-top:8px;">
+        <input name="name" placeholder="Edit name" value="${c.name}">
+        <input name="number" placeholder="Edit number" value="${c.number}">
+        <input name="subject" placeholder="Edit subject" value="${c.subject}">
+        <input name="credits" type="number" placeholder="Edit credits" value="${c.credits}">
+        <textarea name="description" placeholder="Edit description">${c.description}</textarea>
+        <button class="primary-btn" type="submit">Save changes</button>
+      </form>
     </div>
   `).join('');
+
+  // Add toggle functionality for all edit buttons
+  document.querySelectorAll('.toggle-edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.course-card');
+      const form = card.querySelector('.edit-form');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+  });
 }
 
 // Update statistics: count, total credits, last added
 function updateStats(list) {
   const count = list.length;
   const credits = list.reduce((sum, c) => sum + Number(c.credits || 0), 0);
-
   const last = list.slice().sort((a, b) => b.id - a.id)[0];
 
   document.getElementById('stat-my-count').textContent = count;
@@ -89,6 +98,5 @@ function searchTeacherCourses() {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('t-searchBtn')?.addEventListener('click', searchTeacherCourses);
 
-  // Fetch user → then load courses
   fetchMe().then(loadTeacherCourses);
 });
