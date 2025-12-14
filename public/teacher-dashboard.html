@@ -1,108 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Teacher Dashboard - CourseManager</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<header class="site-header">
-  <nav class="navbar">
-    <a href="index.html" class="brand">CourseManager</a>
-
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="teacher-dashboard.html" class="active">Dashboard</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
-      <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
-        Log out
-      </button>
-    </div>
-  </nav>
-</header>
-
-<main class="container">
-
-  <h2 style="color:#2b4d66; margin-bottom:20px;">Teacher Dashboard</h2>
-
-  <div class="stats-row">
-    <div class="stat-card">
-      <h3>Total Courses</h3>
-      <p id="stat-my-count">0</p>
-    </div>
-
-    <div class="stat-card">
-      <h3>Total Credits</h3>
-      <p id="stat-my-credits">0</p>
-    </div>
-
-    <div class="stat-card">
-      <h3>Last Added</h3>
-      <p id="stat-last-added">—</p>
-    </div>
-  </div>
-
-  <section class="form-section no-margin">
-    <h2>Add New Course</h2>
-
-    <form class="course-form" id="add-course-form">
-      <label for="number">Course Number</label>
-      <input id="number" name="number" required>
-
-      <label for="name">Course Name</label>
-      <input id="name" name="name" required>
-
-      <label for="subject">Subject</label>
-      <input id="subject" name="subject" required>
-
-      <label for="credits">Credits</label>
-      <input id="credits" name="credits" type="number" required>
-
-      <label for="description">Description</label>
-      <textarea id="description" name="description" required></textarea>
-
-      <button type="submit" class="primary-btn">Add Course</button>
-    </form>
-  </section>
-
-  <div class="search-bar">
-    <input id="t-searchName" type="text" placeholder="Search by name">
-    <input id="t-searchNumber" type="text" placeholder="Course number">
-    <select id="t-filterSubject">
-      <option value="">All Subjects</option>
-      <option value="Computer Science">Computer Science</option>
-      <option value="Information Technology">Information Technology</option>
-      <option value="Mathematics">Mathematics</option>
-      <option value="Biology">Biology</option>
-    </select>
-    <button id="t-searchBtn" class="primary-btn">Search</button>
-  </div>
-
-  <section class="courses-section">
-    <h2>My Courses</h2>
-    <div id="teacherCourses" class="courses-grid"></div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
-</footer>
-
-<script src="nav.js" defer></script>
-<script src="teacher-dashboard.js" defer></script>
-
-</body>
-</html>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,6 +17,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Courses</a></li>
+        <li><a href="teacher-dashboard.html" class="active">Dashboard</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -134,7 +30,7 @@
   <!-- Main Content -->
   <main class="container">
 
-    <!-- Header -->
+    <!-- Dashboard Header -->
     <div class="dashboard-header">
       <h2>Teacher Dashboard</h2>
       <div>
@@ -145,28 +41,27 @@
     <!-- Stats Cards -->
     <div class="stats-row">
       <div class="stat-card">
-        <h3>Your courses</h3>
+        <h3>Your Courses</h3>
         <p id="stat-my-count">—</p>
       </div>
       <div class="stat-card">
-        <h3>Total credits assigned</h3>
+        <h3>Total Credits Assigned</h3>
         <p id="stat-my-credits">—</p>
       </div>
       <div class="stat-card">
-        <h3>Last added</h3>
+        <h3>Last Added</h3>
         <p id="stat-last-added">—</p>
       </div>
     </div>
 
     <!-- Add Course Form -->
     <section class="form-section">
-      <h2>Add a new course</h2>
+      <h2>Add a New Course</h2>
       <form action="/add-course" method="POST" class="course-form">
-
-        <label for="number">Course number</label>
+        <label for="number">Course Number</label>
         <input id="number" name="number" placeholder="e.g., CS101" required>
 
-        <label for="name">Course name</label>
+        <label for="name">Course Name</label>
         <input id="name" name="name" placeholder="e.g., Intro to Programming" required>
 
         <label for="subject">Subject</label>
@@ -178,19 +73,19 @@
         <label for="description">Description</label>
         <textarea id="description" name="description" placeholder="Brief description" required></textarea>
 
-        <button type="submit" class="primary-btn">Add course</button>
+        <button type="submit" class="primary-btn">Add Course</button>
       </form>
     </section>
 
-    <!-- Teacher Course List -->
+    <!-- Teacher Courses List -->
     <section class="courses-section">
-      <h2>Your courses</h2>
+      <h2>Your Courses</h2>
 
       <div class="search-bar">
         <input id="t-searchName" type="text" placeholder="Search by name">
         <input id="t-searchNumber" type="text" placeholder="Course number">
         <select id="t-filterSubject">
-          <option value="">All subjects</option>
+          <option value="">All Subjects</option>
           <option>Computer Science</option>
           <option>Information Technology</option>
           <option>Mathematics</option>
@@ -213,4 +108,3 @@
   <script src="teacher-dashboard.js" defer></script>
 </body>
 </html>
->>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
