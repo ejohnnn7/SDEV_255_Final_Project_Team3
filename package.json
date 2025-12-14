@@ -1,41 +1,16 @@
 {
-<<<<<<< HEAD
   "name": "coursemanager",
   "version": "1.0.0",
   "description": "CourseManager web app for managing student and teacher courses",
-=======
-  "name": "sdev_255_final_project_team3",
-  "version": "1.0.0",
-  "description": "Final Project for SDEV255 - Course Management System",
-  "homepage": "https://github.com/ejohnnn7/SDEV_255_Final_Project_Team3#readme",
-  "bugs": {
-    "url": "https://github.com/ejohnnn7/SDEV_255_Final_Project_Team3/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ejohnnn7/SDEV_255_Final_Project_Team3.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
->>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-<<<<<<< HEAD
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "fs-extra": "^11.2.0",
     "path": "^0.12.7"
-=======
-    "body-parser": "^1.20.4",
-    "cors": "^2.8.5",
-    "express": "^4.22.1",
-    "express-session": "^1.18.2",
-    "nodemailer": "^7.0.11"
->>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
   }
 }
