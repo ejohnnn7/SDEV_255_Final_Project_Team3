@@ -5,7 +5,8 @@ let currentUser = null;
 function fetchMe() {
   return fetch('/me')
     .then(res => res.json())
-    .then(data => { currentUser = data; });
+    .then(data => { currentUser = data; })
+    .catch(() => { currentUser = null; });
 }
 
 // Render course cards
@@ -19,23 +20,8 @@ function renderCourses(list) {
   }
 
   container.innerHTML = list.map(c => {
-    // Teacher controls (edit + delete)
-    const teacherControls = (currentUser?.role === 'teacher' && currentUser.email === c.createdByEmail)
-      ? `
-        <div class="card-actions">
-          <form action="/edit-course/${c.id}" method="POST" class="course-form no-margin">
-            <input name="name" placeholder="Edit name">
-            <input name="number" placeholder="Edit number">
-            <input name="subject" placeholder="Edit subject">
-            <input name="credits" type="number" placeholder="Edit credits">
-            <textarea name="description" placeholder="Edit description"></textarea>
-            <button class="secondary-btn" type="submit">Save changes</button>
-          </form>
-          <form action="/delete-course/${c.id}" method="POST">
-            <button class="danger-btn" type="submit">Delete</button>
-          </form>
-        </div>
-      ` : '';
+    // Teacher controls removed on courses page
+    const teacherControls = ''; 
 
     // Student controls (add/drop)
     const studentControls = currentUser?.role === 'student'
