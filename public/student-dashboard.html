@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard - CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="brand">CourseManager</a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="student-dashboard.html" class="active">Dashboard</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+      <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
+        Log out
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+
+  <h2 style="color:#2b4d66; margin-bottom:20px;">Student Dashboard</h2>
+
+  <div class="schedule-row">
+
+    <div>
+      <div class="summary-card">
+        <h3>Search Courses</h3>
+        <div class="search-bar">
+          <input id="s-searchName" type="text" placeholder="Search by name">
+          <input id="s-searchNumber" type="text" placeholder="Course number">
+          <select id="s-filterSubject">
+            <option value="">All Subjects</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Biology">Biology</option>
+          </select>
+          <button id="s-searchBtn" class="primary-btn">Search</button>
+        </div>
+      </div>
+
+      <section class="courses-section">
+        <h2>Available Courses</h2>
+        <div id="allCourses" class="courses-grid"></div>
+      </section>
+    </div>
+
+    <div>
+      <div class="summary-card">
+        <h3>My Summary</h3>
+        <p><strong>Total Courses:</strong> <span id="sum-count">0</span></p>
+        <p><strong>Total Credits:</strong> <span id="sum-credits">0</span></p>
+      </div>
+
+      <section class="courses-section">
+        <h2>My Schedule</h2>
+        <div id="mySchedule" class="courses-grid"></div>
+      </section>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
+</footer>
+
+<script src="nav.js" defer></script>
+<script src="student-dashboard.js" defer></script>
+
+</body>
+</html>

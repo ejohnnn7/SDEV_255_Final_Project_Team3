@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1765728773881,
+    "name": "x",
+    "email": "x@gmail.com",
+    "passwordHash": "$2a$10$hPp0d7.DjmGEFYGhlUv3R.nHdoE23zD4N.oFWO0Ci74ZepcTB6.A2",
+    "role": "student"
+  },
+  {
+    "id": 1765728810200,
+    "name": "xx",
+    "email": "xx@gmail.com",
+    "passwordHash": "$2a$10$0DePcf2C9V/neMykDXfYYOa33ipr9STjymF5GWpyKyURjdPNFS9Ge",
+    "role": "teacher"
+  }
+]

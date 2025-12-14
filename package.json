@@ -1,0 +1,16 @@
+{
+  "name": "coursemanager",
+  "version": "1.0.0",
+  "description": "CourseManager web app for managing student and teacher courses",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "fs-extra": "^11.2.0",
+    "path": "^0.12.7"
+  }
+}

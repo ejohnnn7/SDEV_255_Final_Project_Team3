@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">CourseManager</a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <!-- Dashboard link injected by nav.js -->
+      </ul>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+        <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
+          Log out
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <h1>Welcome to CourseManager</h1>
+    <p>Your all-in-one platform to browse, manage, and schedule college courses.</p>
+
+    <div class="hero-actions">
+      <a href="courses.html" class="primary-btn">Browse Courses</a>
+      <a href="signup.html" class="secondary-btn" id="hero-signup">Create an Account</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
+  </footer>
+
+  <script src="nav.js" defer></script>
+</body>
+</html>

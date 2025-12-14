@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courses - CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="navbar">
+    <a href="index.html" class="brand">CourseManager</a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html" class="active">Courses</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+      <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
+        Log out
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="courses-section">
+    <h2>All Courses</h2>
+
+    <div class="search-bar">
+      <input id="searchName" type="text" placeholder="Search by name">
+      <input id="searchNumber" type="text" placeholder="Course number">
+      <select id="filterSubject">
+        <option value="">All Subjects</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Information Technology">Information Technology</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Biology">Biology</option>
+      </select>
+      <button id="searchBtn" class="primary-btn">Search</button>
+    </div>
+
+    <div id="coursesGrid" class="courses-grid"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
+</footer>
+
+<script src="nav.js" defer></script>
+<script src="courses.js" defer></script>
+
+</body>
+</html>
