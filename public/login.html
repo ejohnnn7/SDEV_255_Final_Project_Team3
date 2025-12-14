@@ -9,56 +9,6 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-<header class="site-header">
-  <nav class="navbar">
-    <a href="index.html" class="brand">CourseManager</a>
-
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="courses.html">Courses</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <a href="login.html" class="btn-outline active" id="nav-login">Log in</a>
-      <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
-        Log out
-      </button>
-    </div>
-  </nav>
-</header>
-
-<main class="container">
-  <section class="form-section">
-    <h2>Log in</h2>
-
-    <form id="login-form" class="course-form">
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" required>
-
-      <label for="password">Password</label>
-      <input id="password" type="password" name="password" required>
-
-      <button type="submit" class="primary-btn">Login</button>
-    </form>
-
-    <p style="margin-top:15px; text-align:center; color:#555;">
-      Don’t have an account?
-      <a href="signup.html" style="color:#4a9e88; font-weight:600;">
-        Sign up here
-      </a>
-    </p>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container">SDEV255-50P-IO Team 3. All rights reserved.</div>
-</footer>
-
-<script src="nav.js" defer></script>
-<script src="login.js" defer></script>
-
-=======
   <!-- Navigation -->
   <header class="site-header">
     <nav class="navbar">
@@ -71,6 +21,9 @@
 
       <div class="nav-actions">
         <a href="login.html" class="btn-outline active" id="nav-login">Log in</a>
+        <button class="btn-outline" id="nav-logout" style="display:none; border:none; background:transparent;">
+          Log out
+        </button>
       </div>
     </nav>
   </header>
@@ -80,7 +33,7 @@
     <section class="form-section">
       <h2>Log in</h2>
 
-      <form action="/login" method="POST" class="course-form">
+      <form id="login-form" action="/login" method="POST" class="course-form">
         <label for="email">Email</label>
         <input id="email" type="email" name="email" required>
 
@@ -105,6 +58,6 @@
   </footer>
 
   <script src="nav.js" defer></script>
->>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
+  <script src="login.js" defer></script>
 </body>
 </html>
