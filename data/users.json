@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "id": 1765728773881,
     "name": "x",
     "email": "x@gmail.com",
@@ -14,3 +15,17 @@
     "role": "teacher"
   }
 ]
+=======
+    "role": "teacher",
+    "name": "Elizabeth John",
+    "email": "ejohn7@ivytech.edu",
+    "password": "Testing123"
+  },
+  {
+    "role": "student",
+    "name": "David Cuevas",
+    "email": "dcuevas5@ivytech.edu",
+    "password": "Testing123"
+  }
+]
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35

@@ -1,30 +1,51 @@
+<<<<<<< HEAD
 /* =========================== Global Layout & Resets =========================== */
+=======
+/* ===========================
+   Global Layout & Resets
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 body {
   background: #eef3f8;
   color: #222;
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
 }
 
+<<<<<<< HEAD
 /* =========================== Navigation Bar =========================== */
+=======
+/* ===========================
+   Navigation Bar
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .navbar {
   background: #2b4d66;
   padding: 14px 28px;
@@ -43,7 +64,10 @@ body {
   font-size: 1.3rem;
   text-decoration: none;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 /* Center the nav links */
 .nav-links {
   list-style: none;
@@ -52,7 +76,10 @@ body {
   margin: 0 auto;
   justify-content: center;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .nav-links a {
   color: #fff;
   text-decoration: none;
@@ -62,16 +89,25 @@ body {
   border-radius: 6px;
   transition: background 0.3s ease;
 }
+<<<<<<< HEAD
 
 .nav-links a:hover {
   background: #3a6483;
 }
 
+=======
+.nav-links a:hover {
+  background: #3a6483;
+}
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .nav-links a.active {
   background: #4a9e88;
   color: #fff;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .nav-actions .btn-outline {
   border: 1px solid #fff;
   color: #fff;
@@ -82,36 +118,60 @@ body {
   transition: background 0.3s ease, border-color 0.3s ease;
   margin-left: auto;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .nav-actions .btn-outline:hover {
   background: #4a9e88;
   border-color: #4a9e88;
 }
 
+<<<<<<< HEAD
 /* =========================== Hero Section =========================== */
+=======
+/* ===========================
+   Hero Section
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .hero {
   text-align: center;
   padding: 40px 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .hero h1 {
   font-size: 2rem;
   color: #2b4d66;
   margin-bottom: 10px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .hero p {
   color: #555;
   margin-bottom: 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .hero-actions {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
 
+<<<<<<< HEAD
 /* =========================== Buttons =========================== */
+=======
+/* ===========================
+   Buttons
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .primary-btn {
   background: #4a9e88;
   border: none;
@@ -122,11 +182,17 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
+<<<<<<< HEAD
 
 .primary-btn:hover {
   background: #3c8975;
 }
 
+=======
+.primary-btn:hover {
+  background: #3c8975;
+}
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .secondary-btn {
   background: #cfd9e4;
   color: #222;
@@ -135,11 +201,17 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
+<<<<<<< HEAD
 
 .secondary-btn:hover {
   background: #b7c3d0;
 }
 
+=======
+.secondary-btn:hover {
+  background: #b7c3d0;
+}
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .danger-btn {
   background: #c94f4f;
   color: #fff;
@@ -148,12 +220,21 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .danger-btn:hover {
   background: #a63d3d;
 }
 
+<<<<<<< HEAD
 /* =========================== Add / Edit Course Forms =========================== */
+=======
+/* ===========================
+   Add / Edit Course Forms
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .form-section {
   background: #fff;
   padding: 25px;
@@ -161,20 +242,29 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   margin: 40px 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .form-section h2 {
   color: #2b4d66;
   margin-bottom: 20px;
   font-size: 1.4rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-form label {
   display: block;
   margin: 10px 0 5px;
   font-weight: 600;
   color: #2b4d66;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-form input,
 .course-form textarea {
   width: 100%;
@@ -184,7 +274,10 @@ body {
   margin-bottom: 15px;
   font-size: 0.95rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-form button {
   background: #4a9e88;
   border: none;
@@ -194,7 +287,10 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-form button:hover {
   background: #3c8975;
 }
@@ -204,82 +300,133 @@ body {
   margin: 0 !important;
 }
 
+<<<<<<< HEAD
 /* =========================== View Courses Grid =========================== */
 .courses-section {
   margin: 40px 0;
 }
 
+=======
+/* ===========================
+   View Courses Grid
+   =========================== */
+.courses-section {
+  margin: 40px 0;
+}
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .courses-section h2 {
   color: #2b4d66;
   margin-bottom: 20px;
   font-size: 1.4rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .courses-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-card {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-card h3 {
   color: #2b4d66;
   margin-bottom: 10px;
   font-size: 1.2rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .course-card p {
   margin-bottom: 6px;
   color: #555;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .card-actions {
   display: flex;
   gap: 10px;
   margin-top: 15px;
 }
 
+<<<<<<< HEAD
 /* =========================== Signup Page =========================== */
+=======
+/* ===========================
+   Signup Page
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .signup-grid {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .signup-grid .form-box {
   flex: 1;
   min-width: 300px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .signup-grid h3 {
   color: #2b4d66;
   margin-bottom: 15px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .signup-description {
   color: #555;
   margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
 /* =========================== Student Dashboard =========================== */
+=======
+/* ===========================
+   Student Dashboard
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .schedule-row {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 @media (max-width: 900px) {
   .schedule-row {
     grid-template-columns: 1fr;
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .summary-card {
   background: #fff;
   padding: 16px;
@@ -287,34 +434,52 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   margin-bottom: 16px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .summary-card h3 {
   color: #2b4d66;
   margin-bottom: 6px;
   font-size: 1rem;
 }
 
+<<<<<<< HEAD
 /* =========================== Teacher Dashboard =========================== */
+=======
+/* ===========================
+   Teacher Dashboard
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-bottom: 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .stat-card {
   background: #fff;
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .stat-card h3 {
   margin-bottom: 6px;
   color: #2b4d66;
   font-size: 1rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .search-bar {
   display: grid;
   grid-template-columns: 1fr 180px 140px auto;
@@ -322,7 +487,13 @@ body {
   margin: 16px 0;
 }
 
+<<<<<<< HEAD
 /* =========================== Footer =========================== */
+=======
+/* ===========================
+   Footer
+   =========================== */
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
 .site-footer {
   border-top: 1px solid #cfd9e4;
   padding: 20px;

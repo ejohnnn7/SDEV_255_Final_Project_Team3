@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,3 +102,115 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Dashboard - CourseManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="brand">CourseManager</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn-outline" id="nav-login">Log in</a>
+        <a href="/logout" class="btn-outline" id="nav-logout" style="display:none;">Log out</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h2>Teacher Dashboard</h2>
+      <div>
+        <a class="secondary-btn" href="courses.html">All Courses</a>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <h3>Your courses</h3>
+        <p id="stat-my-count">—</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total credits assigned</h3>
+        <p id="stat-my-credits">—</p>
+      </div>
+      <div class="stat-card">
+        <h3>Last added</h3>
+        <p id="stat-last-added">—</p>
+      </div>
+    </div>
+
+    <!-- Add Course Form -->
+    <section class="form-section">
+      <h2>Add a new course</h2>
+      <form action="/add-course" method="POST" class="course-form">
+
+        <label for="number">Course number</label>
+        <input id="number" name="number" placeholder="e.g., CS101" required>
+
+        <label for="name">Course name</label>
+        <input id="name" name="name" placeholder="e.g., Intro to Programming" required>
+
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" placeholder="e.g., Computer Science" required>
+
+        <label for="credits">Credits</label>
+        <input id="credits" type="number" name="credits" placeholder="e.g., 3" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Brief description" required></textarea>
+
+        <button type="submit" class="primary-btn">Add course</button>
+      </form>
+    </section>
+
+    <!-- Teacher Course List -->
+    <section class="courses-section">
+      <h2>Your courses</h2>
+
+      <div class="search-bar">
+        <input id="t-searchName" type="text" placeholder="Search by name">
+        <input id="t-searchNumber" type="text" placeholder="Course number">
+        <select id="t-filterSubject">
+          <option value="">All subjects</option>
+          <option>Computer Science</option>
+          <option>Information Technology</option>
+          <option>Mathematics</option>
+          <option>Biology</option>
+        </select>
+        <button id="t-searchBtn" class="primary-btn">Search</button>
+      </div>
+
+      <div id="teacherCourses" class="courses-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">© 2025 CourseManager</div>
+  </footer>
+
+  <script src="nav.js" defer></script>
+  <script src="teacher-dashboard.js" defer></script>
+</body>
+</html>
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35

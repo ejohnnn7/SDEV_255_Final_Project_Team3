@@ -1,27 +1,5 @@
 [
   {
-<<<<<<< HEAD
-    "id": 1765729326853,
-    "number": "CS101",
-    "name": "Computing Logic",
-    "subject": "Computer Science",
-    "credits": 4,
-    "description": "Algorithm, Machine Learning",
-    "createdAt": "2025-12-14T16:22:06.853Z",
-    "createdByEmail": "xx@gmail.com"
-  },
-  {
-    "id": 1765729439204,
-    "number": "FT708",
-    "name": "UI/UX",
-    "subject": "Figma",
-    "credits": 2,
-    "description": "Figma Basics",
-    "createdAt": "2025-12-14T16:23:59.204Z",
-    "createdByEmail": "xx@gmail.com"
-  }
-]
-=======
     "id": 1764965371661,
     "number": "CS101",
     "name": "Introduction to Programming",
@@ -56,6 +34,14 @@
     "subject": "Biology",
     "credits": 3,
     "createdByEmail": "ejohn7@ivytech.edu"
+  },
+  {
+    "id": 1765584474504,
+    "number": "405",
+    "name": "Computing Logic",
+    "description": "......",
+    "subject": "Computer Science",
+    "credits": 6,
+    "createdByEmail": "cc@gmail.com"
   }
 ]
->>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35

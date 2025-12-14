@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let __allCourses = [];
 
 function renderCourses(list) {
@@ -58,3 +59,89 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("searchBtn")?.addEventListener("click", searchCourses);
   loadCourses();
 });
+=======
+let currentUser = null;
+
+// Load logged-in user
+function fetchMe() {
+  return fetch('/me')
+    .then(res => res.json())
+    .then(data => { currentUser = data; });
+}
+
+// Render course cards
+function renderCourses(list) {
+  const container = document.getElementById('coursesContainer');
+  container.innerHTML = list.map(c => {
+
+    // Teacher controls (edit + delete)
+    const teacherControls = (currentUser?.role === 'teacher' && currentUser.email === c.createdByEmail)
+      ? `
+        <div class="card-actions">
+          <form action="/edit-course/${c.id}" method="POST" class="course-form no-margin">
+            <input name="name" placeholder="Edit name">
+            <input name="number" placeholder="Edit number">
+            <input name="subject" placeholder="Edit subject">
+            <input name="credits" type="number" placeholder="Edit credits">
+            <textarea name="description" placeholder="Edit description"></textarea>
+            <button class="secondary-btn" type="submit">Save changes</button>
+          </form>
+          <form action="/delete-course/${c.id}" method="POST">
+            <button class="danger-btn" type="submit">Delete</button>
+          </form>
+        </div>
+      `
+      : '';
+
+    // Student controls (add/drop)
+    const studentControls = currentUser?.role === 'student'
+      ? `
+        <div class="card-actions">
+          <form action="/student/add-course/${c.id}" method="POST">
+            <button class="primary-btn" type="submit">Add</button>
+          </form>
+          <form action="/student/drop-course/${c.id}" method="POST">
+            <button class="danger-btn" type="submit">Drop</button>
+          </form>
+        </div>
+      `
+      : '';
+
+    return `
+      <div class="course-card">
+        <h3>${c.number} — ${c.name}</h3>
+        <p>${c.description}</p>
+        <p><strong>Subject:</strong> ${c.subject}</p>
+        <p><strong>Credits:</strong> ${c.credits}</p>
+        ${teacherControls}
+        ${studentControls}
+      </div>
+    `;
+  }).join('');
+}
+
+// Load all courses
+function loadCourses() {
+  fetch('/courses-list')
+    .then(res => res.json())
+    .then(renderCourses);
+}
+
+// Search courses
+function searchCourses() {
+  const q = document.getElementById('searchName').value.trim();
+  const number = document.getElementById('searchNumber').value.trim();
+  const subject = document.getElementById('filterSubject').value.trim();
+
+  const params = new URLSearchParams({ q, number, subject });
+
+  fetch('/search?' + params.toString())
+    .then(res => res.json())
+    .then(renderCourses);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('searchBtn').addEventListener('click', searchCourses);
+  fetchMe().then(loadCourses);
+});
+>>>>>>> c4c6edefbfff1aaa66cb54856c99624f80521d35
