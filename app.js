@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Data paths
 const usersPath = path.join(__dirname, "data", "users.json");
 const schedulesPath = path.join(__dirname, "data", "schedules.json");
+const coursesPath = path.join(__dirname, "data", "courses.json");
 
 // Helpers
 async function readJson(file, fallback) {
@@ -35,7 +36,7 @@ async function readJson(file, fallback) {
       return fallback;
     }
     const data = await fs.readJson(file);
-    return Array.isArray(fallback) && Array.isArray(data) ? data : data || fallback;
+    return data ?? fallback;
   } catch {
     await fs.outputJson(file, fallback, { spaces: 2 });
     return fallback;
@@ -152,8 +153,8 @@ app.post("/logout", (req, res) => {
 // Student schedule routes
 app.get("/student/schedule", requireLogin, requireRole("student"), async (req, res) => {
   const schedules = await readJson(schedulesPath, []);
-  const userSchedule = schedules.find((s) => s.studentEmail === req.session.user.email);
-  res.json(userSchedule?.courses || []);
+  const schedule = schedules.find((s) => s.studentEmail === req.session.user.email);
+  res.json(schedule?.courses || []);
 });
 
 app.post(
@@ -163,7 +164,7 @@ app.post(
   async (req, res) => {
     const courseId = Number(req.params.id);
     const schedules = await readJson(schedulesPath, []);
-    const courses = await readJson(path.join(__dirname, "data", "courses.json"), []);
+    const courses = await readJson(coursesPath, []);
 
     const course = courses.find((c) => c.id === courseId);
     if (!course) return res.status(404).json({ error: "Course not found" });
@@ -204,7 +205,7 @@ app.delete(
 // Courses routes
 app.use("/", coursesRouter);
 
-// Fallback to index for unknown routes (optional)
+// Fallback to index for unknown routes
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
