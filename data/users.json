@@ -5,5 +5,19 @@
     "email": "dcuevas5@ivytech.edu",
     "passwordHash": "$2a$10$Wsd6gWJ54WRc.T.scwW2PungDyBU9.0fyYsE9i/fW13xfkSM78S9m",
     "role": "student"
+  },
+  {
+    "id": 1765843996343,
+    "name": "Elizabeth John",
+    "email": "ejohn7@ivytech.edu",
+    "passwordHash": "$2a$10$Tt6wFGsQKfkJU9Yer6sCFu3DnQfLcvIzYLR7OB5O6ZsAJusmrLVrq",
+    "role": "teacher"
+  },
+  {
+    "id": 1765844414328,
+    "name": "Student Test",
+    "email": "test@student.com",
+    "passwordHash": "$2a$10$kK3VR.KLLdjei4ro6SEW0.0W2rl/F7XWCKHbwIESCKxssHWtthyy2",
+    "role": "student"
   }
 ]

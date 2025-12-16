@@ -62,8 +62,6 @@ function requireRole(role) {
   };
 }
 
-// Routes: Auth
-
 // Current user
 app.get("/me", (req, res) => {
   if (!req.session.user) return res.json(null);

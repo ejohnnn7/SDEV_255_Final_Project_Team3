@@ -40,7 +40,12 @@
         <!-- Student Signup -->
         <div class="form-box">
           <h3>Student</h3>
-          <form action="/signup/student" method="POST" class="course-form">
+          <form
+            id="student-signup-form"
+            action="/signup/student"
+            method="POST"
+            class="course-form"
+          >
             <label for="student-name">Name</label>
             <input id="student-name" name="name" placeholder="Full Name" required>
 
@@ -50,14 +55,21 @@
             <label for="student-password">Password</label>
             <input id="student-password" type="password" name="password" placeholder="Password" required>
 
-            <button type="submit" class="primary-btn">Sign Up as Student</button>
+            <button type="submit" class="primary-btn">
+              Sign Up as Student
+            </button>
           </form>
         </div>
 
         <!-- Teacher Signup -->
         <div class="form-box">
           <h3>Teacher</h3>
-          <form action="/signup/teacher" method="POST" class="course-form">
+          <form
+            id="teacher-signup-form"
+            action="/signup/teacher"
+            method="POST"
+            class="course-form"
+          >
             <label for="teacher-name">Name</label>
             <input id="teacher-name" name="name" placeholder="Full Name" required>
 
@@ -67,7 +79,9 @@
             <label for="teacher-password">Password</label>
             <input id="teacher-password" type="password" name="password" placeholder="Password" required>
 
-            <button type="submit" class="secondary-btn">Sign Up as Teacher</button>
+            <button type="submit" class="secondary-btn">
+              Sign Up as Teacher
+            </button>
           </form>
         </div>
 
