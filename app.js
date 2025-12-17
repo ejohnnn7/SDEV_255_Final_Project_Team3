@@ -4,6 +4,9 @@ const session = require("express-session");
 const fs = require("fs-extra");
 const bcrypt = require("bcryptjs");
 const coursesRouter = require("./routes/courses");
+require("dotenv").config();
+
+const { requireLogin, requireRole } = require("./middleware/auth");
 
 const app = express();
 const PORT = 3000;
@@ -14,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: "supersecretkey",
+    secret: process.env.SESSION_SECRET || "dev_fallback_secret_change_me",
     resave: false,
     saveUninitialized: false,
   })
@@ -45,21 +48,6 @@ async function readJson(file, fallback) {
 
 async function writeJson(file, data) {
   await fs.outputJson(file, data, { spaces: 2 });
-}
-
-// Auth helpers
-function requireLogin(req, res, next) {
-  if (!req.session.user) return res.status(401).json({ error: "Not logged in" });
-  next();
-}
-
-function requireRole(role) {
-  return (req, res, next) => {
-    if (!req.session.user || req.session.user.role !== role) {
-      return res.status(403).json({ error: "Forbidden" });
-    }
-    next();
-  };
 }
 
 // Current user
