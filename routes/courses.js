@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs-extra");
+const { requireLogin, requireRole } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -24,14 +25,14 @@ async function writeCourses(courses) {
   await fs.outputJson(coursesPath, courses, { spaces: 2 });
 }
 
-// List all courses
+// List all courses (public)
 router.get("/courses-list", async (req, res) => {
   const courses = await readCourses();
   res.json(courses);
 });
 
-// Add course (teacher)
-router.post("/add-course", async (req, res) => {
+// Add course (teacher only)
+router.post("/add-course", requireLogin, requireRole("teacher"), async (req, res) => {
   const { number, name, subject, credits, description } = req.body;
   if (!number || !name || !subject || !credits || !description) {
     return res.status(400).json({ error: "Missing fields" });
@@ -55,8 +56,8 @@ router.post("/add-course", async (req, res) => {
   res.json({ message: "Course added", course: newCourse });
 });
 
-// Update course
-router.put("/courses/:id", async (req, res) => {
+// Update course (teacher only)
+router.put("/courses/:id", requireLogin, requireRole("teacher"), async (req, res) => {
   const id = Number(req.params.id);
   const courses = await readCourses();
   const idx = courses.findIndex((c) => c.id === id);
@@ -77,8 +78,8 @@ router.put("/courses/:id", async (req, res) => {
   res.json({ message: "Course updated", course: courses[idx] });
 });
 
-// Delete course
-router.delete("/courses/:id", async (req, res) => {
+// Delete course (teacher only)
+router.delete("/courses/:id", requireLogin, requireRole("teacher"), async (req, res) => {
   const id = Number(req.params.id);
   const courses = await readCourses();
   const exists = courses.some((c) => c.id === id);
