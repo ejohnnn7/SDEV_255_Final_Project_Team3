@@ -9,14 +9,14 @@ function renderAvailableCourses(list) {
   container.innerHTML = list
     .map(
       (c) => `
-    <div class="course-card" data-id="${c.id}">
+    <div class="course-card" data-id="${c._id}">
       <h3>${c.number} — ${c.name}</h3>
       <p>${c.description}</p>
       <p><strong>Subject:</strong> ${c.subject}</p>
       <p><strong>Credits:</strong> ${c.credits}</p>
 
       <div class="card-actions">
-        <button class="primary-btn add-course-btn" type="button" data-id="${c.id}">
+        <button class="primary-btn add-course-btn" type="button" data-id="${c._id}">
           Add
         </button>
       </div>
@@ -28,19 +28,33 @@ function renderAvailableCourses(list) {
   // Attach click events for Add buttons
   document.querySelectorAll(".add-course-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      const id = btn.getAttribute("data-id");
+      const courseId = btn.getAttribute("data-id");
+
+      // UI feedback while adding
+      btn.disabled = true;
+      btn.textContent = "Adding...";
+
       try {
-        const res = await fetch(`/student/add-course/${id}`, {
+        const res = await fetch("/api/users/cart", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ courseId })
         });
+
         const data = await res.json();
         if (!res.ok) {
+          btn.disabled = false;
+          btn.textContent = "Add";
           alert(data.error || "Error adding course");
           return;
         }
+
+        // Confirmation feedback
+        btn.textContent = "Added ✓";
         loadSchedule(); // refresh schedule
       } catch {
+        btn.disabled = false;
+        btn.textContent = "Add";
         alert("Network error while adding course");
       }
     });
@@ -48,20 +62,22 @@ function renderAvailableCourses(list) {
 }
 
 // Render student's schedule with Drop buttons
-function renderSchedule(list) {
+function renderSchedule(schedule) {
   const container = document.getElementById("mySchedule");
   if (!container) return;
 
-  container.innerHTML = list
+  const courses = schedule.courses || [];
+
+  container.innerHTML = courses
     .map(
       (c) => `
-    <div class="course-card" data-id="${c.id}">
+    <div class="course-card" data-id="${c._id}">
       <h3>${c.number} — ${c.name}</h3>
       <p>${c.description}</p>
       <p><strong>Credits:</strong> ${c.credits}</p>
 
       <div class="card-actions">
-        <button class="danger-btn drop-course-btn" type="button" data-id="${c.id}">
+        <button class="danger-btn drop-course-btn" type="button" data-id="${c._id}">
           Drop
         </button>
       </div>
@@ -70,25 +86,27 @@ function renderSchedule(list) {
     )
     .join("");
 
-  const credits = list.reduce((sum, c) => sum + Number(c.credits || 0), 0);
+  const credits = courses.reduce((sum, c) => sum + Number(c.credits || 0), 0);
   document.getElementById("sum-credits").textContent = credits;
-  document.getElementById("sum-count").textContent = list.length;
+  document.getElementById("sum-count").textContent = courses.length;
 
   // Attach click events for Drop buttons
   document.querySelectorAll(".drop-course-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      const id = btn.getAttribute("data-id");
+      const courseId = btn.getAttribute("data-id");
       if (!confirm("Drop this course?")) return;
 
       try {
-        const res = await fetch(`/student/drop-course/${id}`, {
-          method: "DELETE",
+        const res = await fetch(`/api/users/cart/${courseId}`, {
+          method: "DELETE"
         });
+
         const data = await res.json();
         if (!res.ok) {
           alert(data.error || "Error dropping course");
           return;
         }
+
         loadSchedule(); // refresh schedule
       } catch {
         alert("Network error while dropping course");
@@ -97,7 +115,7 @@ function renderSchedule(list) {
   });
 }
 
-// Load all courses
+// Load all courses (MongoDB)
 function loadAllCourses() {
   fetch("/courses-list")
     .then((res) => res.json())
@@ -108,9 +126,9 @@ function loadAllCourses() {
     .catch(() => alert("Error loading courses"));
 }
 
-// Load student's schedule
+// Load student's schedule (MongoDB)
 function loadSchedule() {
-  fetch("/student/schedule")
+  fetch("/api/users/me")
     .then((res) => res.json())
     .then(renderSchedule)
     .catch(() => alert("Error loading schedule"));
@@ -126,7 +144,7 @@ function searchAvailable() {
     const byName = name ? c.name.toLowerCase().includes(name) : true;
     const byNumber = number ? String(c.number).toLowerCase().includes(number) : true;
     const bySubject = subject ? c.subject.toLowerCase() === subject : true;
-    return byName && byNumber && bySubject;
+    return byName && byNum && bySub;
   });
 
   renderAvailableCourses(filtered);

@@ -1,93 +1,92 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs-extra");
 const { requireLogin, requireRole } = require("../middleware/auth");
+const Course = require("../models/course.js");
 
 const router = express.Router();
 
-const coursesPath = path.join(__dirname, "..", "data", "courses.json");
-
-async function readCourses() {
-  try {
-    if (!(await fs.pathExists(coursesPath))) {
-      await fs.outputJson(coursesPath, [], { spaces: 2 });
-      return [];
-    }
-    const data = await fs.readJson(coursesPath);
-    return Array.isArray(data) ? data : [];
-  } catch {
-    await fs.outputJson(coursesPath, [], { spaces: 2 });
-    return [];
-  }
-}
-
-async function writeCourses(courses) {
-  await fs.outputJson(coursesPath, courses, { spaces: 2 });
-}
-
-// List all courses (public)
 router.get("/courses-list", async (req, res) => {
-  const courses = await readCourses();
-  res.json(courses);
-});
-
-// Add course (teacher only)
-router.post("/add-course", requireLogin, requireRole("teacher"), async (req, res) => {
-  const { number, name, subject, credits, description } = req.body;
-  if (!number || !name || !subject || !credits || !description) {
-    return res.status(400).json({ error: "Missing fields" });
+  try {
+    const courses = await Course.find();
+    res.json(courses);
+  } catch {
+    res.status(500).json({ error: "Failed to load courses" });
   }
-
-  const courses = await readCourses();
-  const newCourse = {
-    id: Date.now(),
-    number,
-    name,
-    subject,
-    credits: Number(credits),
-    description,
-    createdAt: new Date().toISOString(),
-    createdByEmail: req.session?.user?.email || null,
-  };
-
-  courses.push(newCourse);
-  await writeCourses(courses);
-
-  res.json({ message: "Course added", course: newCourse });
 });
 
-// Update course (teacher only)
-router.put("/courses/:id", requireLogin, requireRole("teacher"), async (req, res) => {
-  const id = Number(req.params.id);
-  const courses = await readCourses();
-  const idx = courses.findIndex((c) => c.id === id);
-  if (idx === -1) return res.status(404).json({ error: "Course not found" });
+router.post(
+  "/add-course",
+  requireLogin,
+  requireRole("teacher"),
+  async (req, res) => {
+    try {
+      const { number, name, subject, credits, description } = req.body;
 
-  const { name, number, subject, credits, description } = req.body;
+      if (!number || !name || !subject || !credits || !description) {
+        return res.status(400).json({ error: "Missing fields" });
+      }
 
-  courses[idx] = {
-    ...courses[idx],
-    name: name ?? courses[idx].name,
-    number: number ?? courses[idx].number,
-    subject: subject ?? courses[idx].subject,
-    credits: credits !== undefined ? Number(credits) : courses[idx].credits,
-    description: description ?? courses[idx].description,
-  };
+      const newCourse = await Course.create({
+        number,
+        name,
+        subject,
+        credits: Number(credits),
+        description,
+        createdByEmail: req.user.email
+      });
 
-  await writeCourses(courses);
-  res.json({ message: "Course updated", course: courses[idx] });
-});
+      res.json({ message: "Course added", course: newCourse });
+    } catch (err) {
+      console.error("ADD COURSE ERROR:", err);
+      res.status(500).json({ error: "Failed to add course" });
+    }
+  }
+);
 
-// Delete course (teacher only)
-router.delete("/courses/:id", requireLogin, requireRole("teacher"), async (req, res) => {
-  const id = Number(req.params.id);
-  const courses = await readCourses();
-  const exists = courses.some((c) => c.id === id);
-  if (!exists) return res.status(404).json({ error: "Course not found" });
+router.put(
+  "/courses/:id",
+  requireLogin,
+  requireRole("teacher"),
+  async (req, res) => {
+    try {
+      const course = await Course.findById(req.params.id);
+      if (!course) {
+        return res.status(404).json({ error: "Course not found" });
+      }
 
-  const filtered = courses.filter((c) => c.id !== id);
-  await writeCourses(filtered);
-  res.json({ message: "Course deleted" });
-});
+      const { name, number, subject, credits, description } = req.body;
+
+      course.name = name ?? course.name;
+      course.number = number ?? course.number;
+      course.subject = subject ?? course.subject;
+      course.credits =
+        credits !== undefined ? Number(credits) : course.credits;
+      course.description = description ?? course.description;
+
+      await course.save();
+      res.json({ message: "Course updated", course });
+    } catch {
+      res.status(500).json({ error: "Failed to update course" });
+    }
+  }
+);
+
+router.delete(
+  "/courses/:id",
+  requireLogin,
+  requireRole("teacher"),
+  async (req, res) => {
+    try {
+      const course = await Course.findById(req.params.id);
+      if (!course) {
+        return res.status(404).json({ error: "Course not found" });
+      }
+
+      await course.deleteOne();
+      res.json({ message: "Course deleted" });
+    } catch {
+      res.status(500).json({ error: "Failed to delete course" });
+    }
+  }
+);
 
 module.exports = router;

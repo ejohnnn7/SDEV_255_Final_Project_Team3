@@ -2,14 +2,24 @@ function requireLogin(req, res, next) {
   if (!req.session || !req.session.user) {
     return res.status(401).json({ error: "Not logged in" });
   }
+
+  // Normalize user for the rest of the app
+  req.user = req.session.user;
   next();
 }
 
 function requireRole(role) {
   return (req, res, next) => {
-    if (!req.session || !req.session.user || req.session.user.role !== role) {
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+    if (req.session.user.role !== role) {
       return res.status(403).json({ error: "Forbidden" });
     }
+
+    // Ensure req.user is always available
+    req.user = req.session.user;
     next();
   };
 }

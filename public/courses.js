@@ -3,7 +3,7 @@ let currentUser = null;
 
 // Load logged-in user
 function fetchMe() {
-  return fetch('/me')
+  return fetch("/me")
     .then(res => res.json())
     .then(data => { currentUser = data; })
     .catch(() => { currentUser = null; });
@@ -11,30 +11,28 @@ function fetchMe() {
 
 // Render course cards
 function renderCourses(list) {
-  const container = document.getElementById('coursesGrid');
+  const container = document.getElementById("coursesGrid");
   if (!container) return;
 
   if (!list.length) {
-    container.innerHTML = `<p style="color:#555;">No courses found.</p>`;
+    container.innerHTML = `<p>No courses found.</p>`;
     return;
   }
 
   container.innerHTML = list.map(c => {
-    // Teacher controls removed on courses page
-    const teacherControls = ''; 
-
-    // Student controls (add/drop)
-    const studentControls = currentUser?.role === 'student'
-      ? `
-        <div class="card-actions">
-          <form action="/student/add-course/${c.id}" method="POST">
-            <button class="primary-btn" type="submit">Add</button>
-          </form>
-          <form action="/student/drop-course/${c.id}" method="POST">
-            <button class="danger-btn" type="submit">Drop</button>
-          </form>
-        </div>
-      ` : '';
+    // ONLY show Add button for MongoDB-backed courses
+    const studentControls =
+      currentUser?.role === "student" && c._id
+        ? `
+          <div class="card-actions">
+            <button 
+              class="primary-btn add-btn"
+              data-id="${c._id}">
+              Add to Schedule
+            </button>
+          </div>
+        `
+        : "";
 
     return `
       <div class="course-card">
@@ -42,24 +40,43 @@ function renderCourses(list) {
         <p>${c.description}</p>
         <p><strong>Subject:</strong> ${c.subject}</p>
         <p><strong>Credits:</strong> ${c.credits}</p>
-        ${teacherControls}
         ${studentControls}
       </div>
     `;
-  }).join('');
+  }).join("");
+
+  // Attach handlers after render
+  document.querySelectorAll(".add-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const courseId = btn.dataset.id;
+
+      const res = await fetch("/api/users/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ courseId })
+      });
+
+      if (res.ok) {
+        btn.textContent = "Registered";
+        btn.disabled = true;
+      }
+    });
+  });
 }
 
-// Load all courses
+// Load all courses (existing JSON endpoint)
 function loadCourses() {
-  fetch('/courses-list')
+  fetch("/courses-list")
     .then(res => res.json())
     .then(data => {
       __allCourses = data || [];
       renderCourses(__allCourses);
     })
     .catch(() => {
-      const container = document.getElementById('coursesGrid');
-      if (container) container.innerHTML = `<p style="color:#b33;">Error loading courses.</p>`;
+      const container = document.getElementById("coursesGrid");
+      if (container) {
+        container.innerHTML = `<p>Error loading courses.</p>`;
+      }
     });
 }
 

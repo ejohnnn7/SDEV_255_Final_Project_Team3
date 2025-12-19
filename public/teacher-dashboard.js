@@ -166,12 +166,14 @@ function initAddCourseForm() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
+
     const body = {
       number: formData.get("number"),
       name: formData.get("name"),
       subject: formData.get("subject"),
       credits: formData.get("credits"),
       description: formData.get("description"),
+      createdByEmail: currentUser.email
     };
 
     try {
