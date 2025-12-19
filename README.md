@@ -1,80 +1,57 @@
-Stage 1
+Installation & Setup
 
-Purpose: This branch should contain all the work required to finish Stage 1 of the project - focuses on teacher functionality and basic course management.
+    Prerequisites:
+        Node.js
+        npm
+        MongoDB (connection is already configured in the project)
 
-What should be included on this branch:
-1. Basic Web App Setup
-    Initial HTML structure
-    Basic CSS layout or template
-    Nav links between pages
+    Dependencies
 
-2. Course actions
-    Teachers should be able to:
-        Add new course
-            course name
-            description
-            subject
-            number of credits
-        View all courses
-            on an index page
-            links to view course details
-        Edit existing courses
-            update course info
-            edit form page
-        Delete courses
+        This project uses the following main dependencies:
+            express
+            express-session
+            mongoose
+            bcryptjs
+            dotenv
+            fs-extra
+            path
+        All dependencies are listing in package.json
 
-3. Basic Page Routing
-    /courses - list all courses
-    /add-course - form to add a course
-    /edit-course/<id> - edit form
-    /delete-course/<id> - delete route
+    Installaion Steps
 
-4. Early Website Styling and Structure
-    Initial layout
-    Buttons for add/view/edit/delete
-    Navigation links
+        1. Clone the repository
 
-Stage 2:
+             - git clone https://github.com/ejohnnn7/SDEV_255_Final_Project_Team3.git
 
-Purpose:
-This branch contains the work required for Stage 2 of the project - student accounts, login/logout, course enrollment, and role-based features.
+            - cd coursemanager
 
-What should be included on this branch:
+        2. Install dependencies
 
-1. Login System
-    Students and teachers should be able to:
-        Log in
-        Log out
-        Manage sessions
-        See different features based on roles
+            - npm install
 
-2. Authorization (Student vs Teacher Access)
-    Teachers: can manage course listings (create, view, edit, delete)
-    Students: cannot edit or delete courses, can see only enrollment related pages
+        3. Start the application
 
-3. Student Course Enrollment System
-    Students should be able to
-        Search for courses via name or course number
-        Add a course
-        Drop a course
-        View their schedule
+            - npm start
 
-4. Search Functionality
-    Implement search options on the course listing page
-        By course name
-        By course number
+        4. Open your browser and navigate to:
 
-5. Student pages
-    Add pages/routes:
-        /search - search courses
-        /schedule - student's enrolled courses
-        /add-to-schedule/<id>
-        /drop-from-schedule/<id>
+            - http://localhost:3000
+            
+    Authentication & Test Logins
 
-6. Update UI/Nav
-    Students should be able to see:
-        Search courses
-        My schedule
-    Teacher should be able to see:
-        Manage Courses
-        Add a course
+        Test Accounts
+            The following accounts can be used to test the application:
+
+            Student Login:
+                Email:
+                Password:
+
+            Teacher Login:
+                Email:
+                Password:
+
+    Creating New Accounts
+
+        Users can also create their own accounts directly through the application via the "Sign up here" button on the Login page.
+
+        All user data, courses, and schedules are stored in MongoDB.
