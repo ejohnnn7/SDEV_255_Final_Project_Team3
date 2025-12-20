@@ -25,12 +25,10 @@ function renderAvailableCourses(list) {
     )
     .join("");
 
-  // Attach click events for Add buttons
   document.querySelectorAll(".add-course-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const courseId = btn.getAttribute("data-id");
 
-      // UI feedback while adding
       btn.disabled = true;
       btn.textContent = "Adding...";
 
@@ -49,9 +47,8 @@ function renderAvailableCourses(list) {
           return;
         }
 
-        // Confirmation feedback
         btn.textContent = "Added ✓";
-        loadSchedule(); // refresh schedule
+        loadSchedule();
       } catch {
         btn.disabled = false;
         btn.textContent = "Add";
@@ -90,7 +87,6 @@ function renderSchedule(schedule) {
   document.getElementById("sum-credits").textContent = credits;
   document.getElementById("sum-count").textContent = courses.length;
 
-  // Attach click events for Drop buttons
   document.querySelectorAll(".drop-course-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const courseId = btn.getAttribute("data-id");
@@ -107,7 +103,7 @@ function renderSchedule(schedule) {
           return;
         }
 
-        loadSchedule(); // refresh schedule
+        loadSchedule();
       } catch {
         alert("Network error while dropping course");
       }
@@ -115,7 +111,7 @@ function renderSchedule(schedule) {
   });
 }
 
-// Load all courses (MongoDB)
+// Load all courses
 function loadAllCourses() {
   fetch("/courses-list")
     .then((res) => res.json())
@@ -126,7 +122,7 @@ function loadAllCourses() {
     .catch(() => alert("Error loading courses"));
 }
 
-// Load student's schedule (MongoDB)
+// Load student's schedule
 function loadSchedule() {
   fetch("/api/users/me")
     .then((res) => res.json())
@@ -144,7 +140,7 @@ function searchAvailable() {
     const byName = name ? c.name.toLowerCase().includes(name) : true;
     const byNumber = number ? String(c.number).toLowerCase().includes(number) : true;
     const bySubject = subject ? c.subject.toLowerCase() === subject : true;
-    return byName && byNum && bySub;
+    return byName && byNumber && bySubject;
   });
 
   renderAvailableCourses(filtered);
@@ -154,7 +150,6 @@ function searchAvailable() {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("s-searchBtn")?.addEventListener("click", searchAvailable);
 
-  // Verify student role
   fetch("/me")
     .then((res) => res.json())
     .then((user) => {
